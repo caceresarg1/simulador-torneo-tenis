@@ -36,9 +36,14 @@ class Challenge {
 
     private function iniciarRonda(array $jugadores) {
         $ganadores = [];
+
         for ($i = 0; $i < count($jugadores); $i += 2) {
-            $ganador = $this->simularPartido($jugadores[$i], $jugadores[$i + 1]);
-            $ganadores[] = $ganador;
+            if (!isset($jugadores[$i + 1])) {
+                $ganadores[] = $jugadores[$i];
+            } else {
+                $ganador = $this->simularPartido($jugadores[$i], $jugadores[$i + 1]);
+                $ganadores[] = $ganador;
+            }
             echo '<br>';
         }
         return $ganadores;

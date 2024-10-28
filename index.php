@@ -4,11 +4,7 @@ require 'vendor/autoload.php';
 
 use tenischallenge\Entidades\Masculino;
 use tenischallenge\Entidades\Femenino;
-use tenischallenge\Entidades\Challenge;
-
-
-$femenino1 = new Femenino("Gabriela Sabatini", "90", "85");
-$femenino2 = new Femenino("Gisela Dulko", "80", "70");
+use tenischallenge\Servicios\ChallengeServicios;
 
 $jugadoresMasculinos = [
     new Masculino("Guillermo Vilas", "90", "90", "85"),
@@ -23,7 +19,33 @@ $jugadoresMasculinos = [
     new Masculino('Juan Mónaco', '87', '76', '86'),
 ];
 
+$jugadorasFemeninos = [
+    new Femenino("Gabriela Sabatini", "90", "90"),
+    new Femenino('Paola Suárez', '80', '70'),
+    new Femenino('Nadia Podoroska', '85', '80'),
+    new Femenino('Gisela Dulko', '76', '74'),
+    new Femenino('Florencia Labat', '70', '80'),
+    new Femenino('Clarisa Fernández', '60', '70'),
+    new Femenino('María José López', '70', '68'),
+    new Femenino('Patricia Tarabini', '80', '70'),
+    new Femenino('Paula Ormaechea', '86', '76'),
+    new Femenino('Norma Baylon', '87', '76'),
+];
+
+$jugadores = ['jugadoresMasculinos' => $jugadoresMasculinos,
+              'jugadorasFemeninos' => $jugadorasFemeninos];
+
 echo "=== Torneo Masculino ===\n";
-$challenge = new Challenge($jugadoresMasculinos);
-$ganadorMasculino = $challenge->iniciarChallenge();
+echo '<br>';
+$torneoServicios    = new ChallengeServicios($jugadores);
+$ganadores          = $torneoServicios->torneoXGeneros();
 echo "Ganador Challenge Masculino: " . $ganadorMasculino->obtenerNombre();
+
+// echo '<br><br>';
+
+// echo "=== Torneo Femenino ===\n";
+// echo '<br>';
+// $challenge = new Challenge($jugadorasFemeninos);
+// $ganadorFemenino = $challenge->iniciarChallenge();
+// echo "Ganador Challenge Femenino: " . $ganadorFemenino->obtenerNombre();
+

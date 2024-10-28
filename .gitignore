@@ -3,3 +3,7 @@ vendor/
 
 # Archivos de caché y logs
 *.log
+
+# Archivos temporales
+*.tmp
+*~
