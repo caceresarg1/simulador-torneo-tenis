@@ -17,6 +17,12 @@ $jugadoresMasculinos = [
     new Masculino('Diego Schwartzman', '80', '70', '83'),
     new Masculino('Guillermo Cañas', '86', '76', '65'),
     new Masculino('Juan Mónaco', '87', '76', '86'),
+    new Masculino('Federico Delbonis', '66', '70', '80'),
+    new Masculino('Francisco Cerúndolo', '70', '75', '70'),
+    new Masculino('Juan Ignacio Chela', '50', '55', '70'),
+    new Masculino('Mariano Puerta', '50', '60', '45'),
+    new Masculino('Agustín Calleri', '60', '45', '65'),
+    new Masculino('Carlos Berlocq', '77', '70', '75'),
 ];
 
 $jugadorasFemeninos = [
@@ -30,16 +36,26 @@ $jugadorasFemeninos = [
     new Femenino('Patricia Tarabini', '80', '70'),
     new Femenino('Paula Ormaechea', '86', '76'),
     new Femenino('Norma Baylon', '87', '76'),
+    new Femenino('Mercedes Paz', '87', '76'),
+    new Femenino('Catalina Castaño', '87', '76'),
+    new Femenino('Florencia Molinero', '87', '76'),
+    new Femenino('Mariana Díaz Oliva', '87', '76'),
+    new Femenino('Victoria Bosio', '87', '76'),
+    new Femenino('Tatiana Búa', '87', '76'),
 ];
 
 $jugadores = ['jugadoresMasculinos' => $jugadoresMasculinos,
               'jugadorasFemeninos' => $jugadorasFemeninos];
 
-echo "=== Torneo Masculino ===\n";
-echo '<br>';
 $torneoServicios    = new ChallengeServicios($jugadores);
 $ganadores          = $torneoServicios->torneoXGeneros();
-echo "Ganador Challenge Masculino: " . $ganadorMasculino->obtenerNombre();
+
+echo '<br><br>';
+echo "\n=== Resultados Finales ===\n";
+echo '<br>';
+echo "Ganador Challenge Masculino: " . $ganadores['masculino']->obtenerNombre();
+echo '<br>';
+echo "Ganador Challenge Femenino: " . $ganadores['femenino']->obtenerNombre();
 
 // echo '<br><br>';
 

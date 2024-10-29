@@ -13,17 +13,25 @@ class ChallengeServicios {
     }
 
     public function torneoXGeneros() {
-        $jugadoresMasculinos = array_filter($this->jugadores, 'jugadoresMasculinos');
-        $jugadorasFemeninos = array_filter($this->jugadores, 'jugadorasFemeninos');
+        $jugadoresMasculinos = $this->jugadores['jugadoresMasculinos'];
+        $jugadorasFemeninos = $this->jugadores['jugadorasFemeninos'];
 
         // Torneo Masculino
         echo "=== Torneo Masculino ===\n";
+        echo '<br>';
         $challengeMasculino = new Challenge($jugadoresMasculinos);
         $ganadorMasculino = $challengeMasculino->iniciarChallenge();
 
         // Torneo Femenino
+        echo '<br><br>';
         echo "\n=== Torneo Femenino ===\n";
+        echo '<br>';
         $torneoFemenino = new Challenge($jugadorasFemeninos);
         $ganadorFemenino = $torneoFemenino->iniciarChallenge();
+
+        return [
+            'masculino' => $ganadorMasculino,
+            'femenino' => $ganadorFemenino,
+        ];
     }
 }
