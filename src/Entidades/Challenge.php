@@ -10,8 +10,8 @@ class Challenge {
     }
 
     private function simularPartido(Jugador $jugador1, Jugador $jugador2): Jugador {
-        $suerte1 = rand(-10, 16);
-        $suerte2 = rand(-10, 16);
+        $suerte1 = rand(0, 100);
+        $suerte2 = rand(0, 100);
 
         $rendimiento1 = $jugador1->calcularRendimiento() + $suerte1;
         $rendimiento2 = $jugador2->calcularRendimiento() + $suerte2;
@@ -20,25 +20,13 @@ class Challenge {
 
         return $rendimiento1 >= $rendimiento2 ? $jugador1 : $jugador2;
     }
-
-    // public function iniciarChallenge() {
-    //     $ronda = 1;
-    //     while (count($this->jugadores) > 1) {
-    //         echo "Ronda $ronda:\n ";
-    //         echo '<br>';
-    //         $this->jugadores = $this->iniciarRonda($this->jugadores);
-    //         $ronda++;
-    //         echo '<br>';
-    //     }
-    //     // echo "Ganador del torneo: " . $this->jugadores[0]->obtenerNombre() . "\n";
-    //     return $this->jugadores[0];
-    // }
     
     public function iniciarChallenge(): Jugador {
         $fase           = 1;
         $rondaJugadores = $this->jugadores;
 
         while (count($rondaJugadores) > 1) {
+            echo "<br>";
             echo "Fase $fase:\n ";
             echo "<br>";
 
