@@ -6,5 +6,8 @@
     "psr-4": {
       "tenischallenge\\": "src/"
     }
-  }
+  },
+    "require": {
+        "slim/slim": "^4.0"
+    }
 }
