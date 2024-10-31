@@ -6,7 +6,6 @@ use tenischallenge\Entidades\Femenino;
 use tenischallenge\Entidades\Masculino;
 
 class DataJugadores {
-    private $jugadores = [];
 
     function leerJugadores() {
         $jugadoresMasculinos = [
@@ -47,9 +46,8 @@ class DataJugadores {
             new Femenino('Tatiana Búa', '87', '76'),
         ];
         
-        $jugadores = ['jugadoresMasculinos' => $jugadoresMasculinos,
-                      'jugadorasFemeninos' => $jugadorasFemeninos];
+        return ['jugadoresMasculinos' => $jugadoresMasculinos,
+                'jugadorasFemeninos' => $jugadorasFemeninos];
 
-        return $this->jugadores;
     }
 }

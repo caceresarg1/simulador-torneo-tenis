@@ -1,14 +1,46 @@
 <?php
 
-use Slim\Factory\AppFactory;
-use tenischallenge\controllers\ChallengeControlador;
-
 require 'vendor/autoload.php';
+
+use Psr\Http\Message\ResponseInterface as Response;
+use Psr\Http\Message\ServerRequestInterface as Request;
+use Slim\Factory\AppFactory;
+
+use tenischallenge\Controllers\ChallengeControlador;
+use tenischallenge\Repositorios\DataJugadores;
+use tenischallenge\Servicios\ChallengeServicios;
+
+// $app = AppFactory::create();
+
+// // Instancia de las dependencias manualmente
+$DataJugadores = new DataJugadores();
+$ChallengeServicios = new ChallengeServicios($DataJugadores);
+
+$challengeControlador = new ChallengeControlador($ChallengeServicios, $DataJugadores);
+
+// // $app->post('/api/iniciarChallenge', [$challengeControlador, 'iniciarChallenge']);
+// // $app->get('/api/challenge', [$challengeControlador, 'leerChallenge']);
+// $app->get('/api/test', function (Request $request, Response $response) {
+//     $response->getBody()->write("Hello, World!");
+//     return $response;
+// });
+
+// $app->addErrorMiddleware(true, true, true);
+
+// $app->run();
 
 $app = AppFactory::create();
 
-$app->post('/api/iniciarChallenge', [ChallengeControlador::class, 'iniciarChallenge']);
+// Agregar esto para manejar el subdirectorio
+$app->setBasePath('/tenischallenge');
 
-$app->get('/api/challenge', [ChallengeControlador::class, 'leerChallenge']);
+$app->post('/api/iniciarChallenge', [$challengeControlador, 'iniciarChallenge']);
+
+// $app->get('/test', function (Request $request, Response $response) {
+//     $response->getBody()->write("Hello");
+//     return $response;
+// });
+
+$app->addErrorMiddleware(true, true, true);
 
 $app->run();

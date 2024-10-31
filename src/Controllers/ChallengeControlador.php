@@ -8,30 +8,21 @@ use Psr\Http\Message\ServerRequestInterface as Request;
 use tenischallenge\Repositorios\DataJugadores;
 
 class ChallengeControlador {
-    private $challengeServicios;
-    private $dataJugadores;
+    private $ChallengeServicios;
+    private $DataJugadores;
 
-    public function __construct(ChallengeServicios $challengeServicios, DataJugadores $dataJugadores) {
-        $this->challengeServicios = $challengeServicios;
-        $this->dataJugadores = $dataJugadores;
+    public function __construct(ChallengeServicios $ChallengeServicios, DataJugadores $DataJugadores) {
+        $this->ChallengeServicios = $ChallengeServicios;
+        $this->DataJugadores = $DataJugadores;
     }
 
-    // Inicia el torneo y devuelve el ganador
-    // public function iniciarTorneo(Request $request, Response $response): Response {
-        // $data = $request->getParsedBody();
-        // $jugadores = $data['jugadores'] ?? [];
-        // $genero = $data['genero'] ?? '';
-
-        // $ganador = $this->challengeServicios->simularTorneo($jugadores, $genero);
-        // $response->getBody()->write(json_encode(['ganador' => $ganador->getNombre()]));
-
-        // return $response->withHeader('Content-Type', 'application/json');
-    // }
-
     public function iniciarChallenge(Request $request, Response $response): Response {
-        $jugadores = $this->dataJugadores->leerJugadores();
-
-        $response->getBody()->write(json_encode(['jugadores' => $jugadores]));
-        return $response->withStatus(200);
+        $resultado = $this->ChallengeServicios->torneoXGeneros();
+        $responseData = [
+            'ganador_masculino' => $resultado['masculino']->obtenerNombre(),
+            'ganador_femenino' => $resultado['femenino']->obtenerNombre(),
+            'detalle_torneo' => $resultado['detalle_torneo']
+        ];
+        return $response->withHeader('Content-Type', 'application/json')->withStatus(200);
     }
 }
