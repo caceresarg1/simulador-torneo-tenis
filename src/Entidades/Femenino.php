@@ -17,4 +17,12 @@ class Femenino extends Jugador {
     public function obtenerNombre() {
         return $this->nombre;
     }
+
+    public function obtenerArray() {
+        return [
+            'nombre' => $this->nombre,
+            'nivelHabilidad' => $this->nivelHabilidad,
+            'reaccion' => $this->reaccion,
+        ];
+    }
 }

@@ -19,4 +19,14 @@ class Masculino extends Jugador {
     public function obtenerNombre() {
         return $this->nombre;
     }
+
+    public function obtenerArray() {
+        // error_log("obtenerArray llamado para: " . $this->nombre);
+        return [
+            'nombre' => $this->nombre,
+            'nivelHabilidad' => $this->nivelHabilidad,
+            'fuerza' => $this->fuerza,
+            'velocidad' => $this->velocidad,
+        ];
+    }
 }

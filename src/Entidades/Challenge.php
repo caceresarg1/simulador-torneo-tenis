@@ -12,8 +12,8 @@ class Challenge {
     }
 
     private function simularPartido(Jugador $jugador1, Jugador $jugador2): Jugador {
-        $suerte1 = rand(0, 100);
-        $suerte2 = rand(0, 100);
+        $suerte1 = rand(0, 50);
+        $suerte2 = rand(0, 50);
 
         $rendimiento1 = $jugador1->calcularRendimiento() + $suerte1;
         $rendimiento2 = $jugador2->calcularRendimiento() + $suerte2;
@@ -78,5 +78,9 @@ class Challenge {
 
     public function obtenerDetallesPartido(): array {
         return $this->detallePartidos;
+    }
+
+    public function testSimularPartido(Jugador $jugador1, Jugador $jugador2) {
+        return $this->simularPartido($jugador1, $jugador2);
     }
 }
