@@ -37,6 +37,7 @@ class DataJugadores {
 
         return ['jugadoresMasculinos' => $jugadoresMasculinos,
                 'jugadorasFemeninos' => $jugadorasFemeninos];
+                
 
 
         // $jugadoresMasculinos = [

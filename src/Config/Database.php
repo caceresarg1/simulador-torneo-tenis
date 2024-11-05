@@ -9,6 +9,7 @@ use PDOException;
 
 class Database {
     private $pdo;
+    private $stmt;
 
     public function __construct() {
         $host   = DB_HOST;
@@ -24,6 +25,18 @@ class Database {
         } catch (PDOException $e) {
             die("Error de conexión a la base de datos: " . $e->getMessage());
         }
+    }
+
+    public function query($sql) {
+        $this->stmt = $this->pdo->prepare($sql);
+    }
+
+    public function execute($params = []) {
+        return $this->stmt->execute($params);
+    }
+
+    public function fetchAll() {
+        return $this->stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
     public function getConnection() {
