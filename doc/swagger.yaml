@@ -1,1 +1,102 @@
 openapi: 3.0.0
+info:
+  title: API de Tenis Challenge
+  version: 1.0.0
+  description: Documentación de la API para el torneo de tenis.
+servers:
+  - url: http://localhost/tenischallenge
+    description: Servidor local
+
+paths:
+  /api/iniciarChallenge:
+    post:
+      summary: Inicia un nuevo torneo
+      description: Devuelve el ganador masculino y femenino, así como el detalle de las partidas del torneo.
+      tags:
+        - Torneos
+      responses:
+        '200':
+          description: Resultado del torneo
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ganador_masculino:
+                    type: string
+                  ganador_femenino:
+                    type: string
+                  detalle_torneo:
+                    type: object
+                    properties:
+                      masculino:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            fase:
+                              type: integer
+                            jugador1:
+                              type: string
+                            rendimiento1:
+                              type: integer
+                            jugador2:
+                              type: string
+                            rendimiento2:
+                              type: integer
+                      femenino:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            fase:
+                              type: integer
+                            jugador1:
+                              type: string
+                            rendimiento1:
+                              type: integer
+                            jugador2:
+                              type: string
+                            rendimiento2:
+                              type: integer
+
+
+  /api/obtenerJugadores:
+    get:
+      summary: Obtiene la lista de jugadores
+      description: Devuelve un listado de jugadores masculinos y femeninos.
+      tags:
+        - Jugadores
+      responses:
+        '200':
+          description: Listado de jugadores
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  jugadoresMasculinos:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        nombre:
+                          type: string
+                        nivelHabilidad:
+                          type: integer
+                        fuerza:
+                          type: integer
+                        velocidad:
+                          type: integer
+                  jugadorasFemeninas:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        nombre:
+                          type: string
+                        nivelHabilidad:
+                          type: integer
+                        reaccion:
+                          type: integer
+

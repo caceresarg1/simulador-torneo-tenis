@@ -2,6 +2,10 @@
 require 'vendor/autoload.php';
 require __DIR__ . '/routes.php'; // Incluye las rutas para la API
 
+
+// Tu configuración y carga de rutas
+
+
 // use tenischallenge\Repositorios\DataJugadores;
 // use  tenischallenge\Entidades\Masculino;
 

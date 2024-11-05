@@ -1,7 +1,6 @@
 <?php
 
 require 'vendor/autoload.php';
-require 'src/SwaggerSetup.php';
 
 use Slim\Factory\AppFactory;
 
