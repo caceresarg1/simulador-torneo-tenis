@@ -75,29 +75,34 @@ class ChallengeControlador {
 
         $idTorneo = $this->db->lastInsertId();
 
+        
         // Insertar cada partido
+        $p = 0;
         foreach ($data['detalle_torneo'] as $partido) {
             $queryPartido = "INSERT INTO partidos (id_torneo, fase, jugador1, rendimiento1, jugador2, rendimiento2, ganador) 
                             VALUES (:id_torneo, :fase, :jugador1, :rendimiento1, :jugador2, :rendimiento2, :ganador)";
             $stmt = $this->db->prepare($queryPartido);
 
             $stmt->execute([
-                ':id_torneo' => $partido['id_torneo'],
-                ':fase' => $partido['fase'],
-                ':jugador1' => $partido['jugador1'],
-                ':rendimiento1' => $partido['rendimiento1'],
-                ':jugador2' => $partido['rendimiento1'],
-                ':rendimiento2' => $partido['rendimiento1'],
-            ])
+                ':id_torneo' => $idTorneo,
+                ':fase' => $partido[$p]['fase'],
+                ':jugador1' => $partido[$p]['jugador1'],
+                ':rendimiento1' => $partido[$p]['rendimiento1'],
+                ':jugador2' => $partido[$p]['rendimiento1'],
+                ':rendimiento2' => $partido[$p]['rendimiento1'],
+                ':ganador' => $partido[$p]['ganador']
+            ]);
 
-            $this->db->bind(':id_torneo', $idTorneo);
-            $this->db->bind(':fase', $partido['fase']);
-            $this->db->bind(':jugador1', $partido['jugador1']);
-            $this->db->bind(':rendimiento1', $partido['rendimiento1']);
-            $this->db->bind(':jugador2', $partido['jugador2']);
-            $this->db->bind(':rendimiento2', $partido['rendimiento2']);
-            $this->db->bind(':ganador', $partido['ganador']);
-            $this->db->execute();
+            $p++;
+
+            // $this->db->bind(':id_torneo', $idTorneo);
+            // $this->db->bind(':fase', $partido['fase']);
+            // $this->db->bind(':jugador1', $partido['jugador1']);
+            // $this->db->bind(':rendimiento1', $partido['rendimiento1']);
+            // $this->db->bind(':jugador2', $partido['jugador2']);
+            // $this->db->bind(':rendimiento2', $partido['rendimiento2']);
+            // $this->db->bind(':ganador', $partido['ganador']);
+            // $this->db->execute();
         }
     }
 }

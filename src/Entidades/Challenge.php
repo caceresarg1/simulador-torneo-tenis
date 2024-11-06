@@ -20,9 +20,13 @@ class Challenge {
 
         // echo $jugador1->obtenerNombre() . " (" . $rendimiento1 . ") vs " . $jugador2->obtenerNombre() . " (" . $rendimiento2 . ")\n";
 
-        $this->registrarPartido($jugador1, $jugador2, $rendimiento1, $rendimiento2);
+        
+        $ganador = $rendimiento1 >= $rendimiento2 ? $jugador1 : $jugador2;
 
-        return $rendimiento1 >= $rendimiento2 ? $jugador1 : $jugador2;
+        $this->registrarPartido($jugador1, $jugador2, $rendimiento1, $rendimiento2, $ganador);
+
+        return  $ganador;
+
     }
     
     // public function iniciarChallenge(): Jugador {
@@ -66,13 +70,14 @@ class Challenge {
         return $ganadores;
     }
 
-    public function  registrarPartido(Jugador $jugador1, Jugador $jugador2, int $rendimiento1, int $rendimiento2) {
+    public function  registrarPartido(Jugador $jugador1, Jugador $jugador2, int $rendimiento1, int $rendimiento2, Jugador $ganador) {
         $this->detallePartidos[] = [
             'fase' => $this->fase,
             'jugador1' => $jugador1->obtenerNombre(),
             'rendimiento1' => $rendimiento1,
             'jugador2' => $jugador2->obtenerNombre(),
-            'rendimiento2' => $rendimiento2
+            'rendimiento2' => $rendimiento2,
+            'ganador' => $ganador->obtenerNombre()
         ];
     }
 
