@@ -88,8 +88,8 @@ class ChallengeControlador {
                 ':fase' => $partido[$p]['fase'],
                 ':jugador1' => $partido[$p]['jugador1'],
                 ':rendimiento1' => $partido[$p]['rendimiento1'],
-                ':jugador2' => $partido[$p]['rendimiento1'],
-                ':rendimiento2' => $partido[$p]['rendimiento1'],
+                ':jugador2' => $partido[$p]['jugador2'],
+                ':rendimiento2' => $partido[$p]['rendimiento2'],
                 ':ganador' => $partido[$p]['ganador']
             ]);
 
