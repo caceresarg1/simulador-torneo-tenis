@@ -12,16 +12,24 @@ class Masculino extends Jugador {
         $this->velocidad = $velocidad;
     }
 
+    /**
+     * Calculo de rendimiento del partidos del challenge masculino
+     */
     public function calcularRendimiento() {
         return $this->nivelHabilidad + $this->fuerza + $this->velocidad;
     }
 
+    /**
+     * Obtener el apellido y nombre de los jugadores masculinos.
+     */
     public function obtenerNombre() {
         return $this->nombre;
     }
 
+    /**
+     * Obtener array de  los datos de los jugadores masculinos.
+     */
     public function obtenerArray() {
-        // error_log("obtenerArray llamado para: " . $this->nombre);
         return [
             'nombre' => $this->nombre,
             'nivelHabilidad' => $this->nivelHabilidad,

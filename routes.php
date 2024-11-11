@@ -11,7 +11,6 @@ use tenischallenge\Servicios\ChallengeServicios;
 // Instancia de las dependencias manualmente
 $DataJugadores = new DataJugadores();
 $ChallengeServicios = new ChallengeServicios($DataJugadores);
-
 $challengeControlador = new ChallengeControlador($ChallengeServicios, $DataJugadores);
 
 $app = AppFactory::create();

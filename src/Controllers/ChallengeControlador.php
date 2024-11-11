@@ -20,9 +20,13 @@ class ChallengeControlador {
         $this->ChallengeServicios = $ChallengeServicios;
         $this->DataJugadores = $DataJugadores;
 
-        $this->db = (new Database())->getConnection();
+        $this->db = (new Database)->getConnection();
     }
 
+
+    /**
+     * Devuelve el ganador masculino y femenino, así como el detalle de las partidas del torneo.
+     */
     public function iniciarChallenge(Request $request, Response $response): Response {
         $resultado = $this->ChallengeServicios->torneoXGeneros();
         $responseData = [
@@ -32,13 +36,17 @@ class ChallengeControlador {
         ];
         $response->getBody()->write(json_encode($responseData, JSON_UNESCAPED_UNICODE));
 
-        $this->guardarResultadoChallenge($responseData);
+        $this->ChallengeServicios->guardarResultadoChallenge($responseData);
 
         return $response->withHeader('Content-Type', 'application/json charset=UTF-8')->withStatus(200);
     }
 
+
+    /**
+     * Devuelve un listado de jugadores masculinos y femeninos.
+     */
     public function obtenerJugadores(Request $request, Response $response): Response {
-        $jugadores = $this->DataJugadores->leerJugadores();
+        $jugadores = $this->DataJugadores->obtenerJugadores();
 
         // Transformar jugadores a arreglos
         $jugadoresMasculinos = array_map(function($jugador) {
@@ -58,51 +66,5 @@ class ChallengeControlador {
         return $response->withHeader('Content-Type', 'application/json; charset=UTF-8')->withStatus(200);
     }
 
-    public function guardarResultadoChallenge($data) {
-        $queryTorneo = "INSERT INTO torneos (tipo_torneo, ganador) VALUES (:tipo, :ganador)";
-
-        $stmt = $this->db->prepare($queryTorneo);
-
-        $stmt->execute([
-            ':tipo' => 'MASCULINO',
-            ':ganador' =>  $data['ganador_masculino']
-        ]);
-
-        $stmt->execute([
-            ':tipo' => 'FEMENINO',
-            ':ganador' =>   $data['ganador_femenino']
-        ]);
-
-        $idTorneo = $this->db->lastInsertId();
-
-        
-        // Insertar cada partido
-        $p = 0;
-        foreach ($data['detalle_torneo'] as $partido) {
-            $queryPartido = "INSERT INTO partidos (id_torneo, fase, jugador1, rendimiento1, jugador2, rendimiento2, ganador) 
-                            VALUES (:id_torneo, :fase, :jugador1, :rendimiento1, :jugador2, :rendimiento2, :ganador)";
-            $stmt = $this->db->prepare($queryPartido);
-
-            $stmt->execute([
-                ':id_torneo' => $idTorneo,
-                ':fase' => $partido[$p]['fase'],
-                ':jugador1' => $partido[$p]['jugador1'],
-                ':rendimiento1' => $partido[$p]['rendimiento1'],
-                ':jugador2' => $partido[$p]['jugador2'],
-                ':rendimiento2' => $partido[$p]['rendimiento2'],
-                ':ganador' => $partido[$p]['ganador']
-            ]);
-
-            $p++;
-
-            // $this->db->bind(':id_torneo', $idTorneo);
-            // $this->db->bind(':fase', $partido['fase']);
-            // $this->db->bind(':jugador1', $partido['jugador1']);
-            // $this->db->bind(':rendimiento1', $partido['rendimiento1']);
-            // $this->db->bind(':jugador2', $partido['jugador2']);
-            // $this->db->bind(':rendimiento2', $partido['rendimiento2']);
-            // $this->db->bind(':ganador', $partido['ganador']);
-            // $this->db->execute();
-        }
-    }
+    
 }
