@@ -4,7 +4,7 @@ Este proyecto implementa un simulador de torneo de tenis mediante un API REST, d
 
 ## **Contenido**
 - [Requerimientos](#requerimientos)
-- [Instalación/Configuración](#instalacion)
+- [Instalación/Configuración](#Instalación/Configuración)
 
 
 ## Requerimientos
